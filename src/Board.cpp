@@ -15,6 +15,12 @@ Board::Board()
 
 Grid Board::at(Position p) const
 {
+    if( ! onBoard(p))
+    {
+        static Grid nullGrid;
+        return nullGrid;
+    } 
+    
     return grids[p];
 }
 

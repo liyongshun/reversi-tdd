@@ -33,6 +33,8 @@ TEST(BoardTest, should_return_false_given_out_of_range_of_a1_to_h8)
     ASSERT_FALSE(board.onBoard(moreThanh8));
     ASSERT_FALSE(board.isOccupied(lessThana1));
     ASSERT_FALSE(board.isOccupied(moreThanh8));
+    ASSERT_FALSE(board.at(lessThana1).isOccupied());
+    ASSERT_FALSE(board.at(moreThanh8).isOccupied());
 }
 
 TEST(BoardTest, should_place_disk_given_a_positon_in_the_board)
