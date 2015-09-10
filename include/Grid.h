@@ -1,7 +1,7 @@
 #ifndef _INCL_GRID_H_
 #define _INCL_GRID_H_
 
-enum GridStatus { _, B, W };
+enum GridStatus { EMPTY, BLACK, WHITE };
 
 struct Grid
 {

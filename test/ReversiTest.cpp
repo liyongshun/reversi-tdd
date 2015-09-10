@@ -1,18 +1,18 @@
-// #include "gtest/gtest.h"
-// #include "Reversi.h"
+#include "gtest/gtest.h"
+#include "Reversi.h"
 
-// struct ReversiTest : testing::Test
-// {
-// protected:
-//     Reversi reversi;
+struct ReversiTest : testing::Test
+{
+protected:
+    Reversi reversi;
     
-// };
+};
 
-// TEST_F(ReversiTest, should_get_a_board_from_reversi_equals_a_init_board)
-// {
-//     const Board EXPECT_INIT_BOARD;
-//     ASSERT_EQ(EXPECT_INIT_BOARD, Reversi().getBoard());
-// }
+TEST_F(ReversiTest, should_get_a_board_from_reversi_equals_a_init_board)
+{
+    const Board EXPECT_INIT_BOARD;
+    // ASSERT_EQ(EXPECT_INIT_BOARD, Reversi().getBoard());
+}
 
 // TEST_F(ReversiTest, should_get_available_positions_given_a_valid_position_in_the_board)
 // {

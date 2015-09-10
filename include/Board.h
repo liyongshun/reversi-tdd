@@ -4,10 +4,12 @@
 #include "Position.h"
 #include "Grid.h"
 
+struct Positions;
 struct Board
 {
     Board();
     void place(Position, GridStatus);
+    void place(const Positions&, GridStatus);
     void turnOver(Position);
     
     Grid at(Position p) const;

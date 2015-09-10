@@ -1,4 +1,6 @@
 #include "Board.h"
+#include "Positions.h"
+#include <iostream>
 
 Board::Board()
 {
@@ -7,10 +9,10 @@ Board::Board()
         status.reset();
     }
 
-    grids[e4].place(B);
-    grids[d5].place(B);
-    grids[d4].place(W);
-    grids[e5].place(W);
+    grids[e4].place(BLACK);
+    grids[d5].place(BLACK);
+    grids[d4].place(WHITE);
+    grids[e5].place(WHITE);
 }
 
 Grid Board::at(Position p) const
@@ -38,6 +40,14 @@ bool Board::onBoard(Position p)
 void Board::place(Position p, GridStatus s)
 {
     grids[p].place(s);
+}
+
+void Board::place(const Positions& positions, GridStatus status)
+{
+    for(size_t index = 0; index < positions.size(); ++index)
+    {
+        place(positions.at(index), status);
+    }
 }
 
 void Board::turnOver(Position p)

@@ -5,22 +5,22 @@ Grid::Grid()
     reset();
 }
 
-void Grid::place(GridStatus s)
+void Grid::place(GridStatus status)
 {
-    if(s == _) return;
-    status = s;
+    if(status == EMPTY) return;
+    this->status = status;
 }
 
 void Grid::reset()
 {
-    status = _;
+    status = EMPTY;
 }
 
 void Grid::turnOver()
 {
     if( ! isOccupied()) return;
 
-    status = isBlack() ? W : B;
+    status = isBlack() ? WHITE : BLACK;
 }
 
 bool Grid::isOccupied() const
@@ -30,10 +30,10 @@ bool Grid::isOccupied() const
 
 bool Grid::isBlack() const
 {
-    return status == B;
+    return status == BLACK;
 }
 
 bool Grid::isWhite() const
 {
-    return status == W;
+    return status == WHITE;
 }
