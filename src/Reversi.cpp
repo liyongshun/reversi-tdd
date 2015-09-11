@@ -1,61 +1,9 @@
 #include "Reversi.h"
-#include <iostream>
+#include "Direction.h"
 
 const Board& Reversi::getBoard() const
 {
     return board;
-}
-
-namespace
-{
-    const Position INVALID_POSITION = static_cast<Position>(MAX_GRID_NUM);
-
-    Position up(Position p)
-    {
-        return static_cast<Position>(p-8);
-    }
-
-    Position down(Position p)
-    {
-        return static_cast<Position>(p+8);
-    }
-
-    bool onARow(Position l, Position r)
-    {
-        return l/8 == r/8;
-    }
-
-    Position left(Position p)
-    {
-        Position leftPos = static_cast<Position>(p-1);
-        return onARow(p, leftPos) ? leftPos : INVALID_POSITION;
-    }
-
-    Position right(Position p)
-    {
-        Position rightPos = static_cast<Position>(p+1);
-        return onARow(p, rightPos) ? rightPos : INVALID_POSITION;
-    }
-
-    Position leftUp(Position p)
-    {
-        return left(up(p));
-    }
-
-    Position leftDown(Position p)
-    {
-        return left(down(p));
-    }
-
-    Position rightUp(Position p)
-    {
-        return right(up(p));
-    }
-
-    Position rightDown(Position p)
-    {
-        return right(down(p));
-    }
 }
 
 bool Reversi::hasNext(Position curr, Position moves) const
@@ -63,19 +11,19 @@ bool Reversi::hasNext(Position curr, Position moves) const
     return board.isOccupied(moves) && board.at(moves) != board.at(curr);
 }
 
-void Reversi::find(Position p, MoveFun move)
+void Reversi::find(Position p, const Removable& direction)
 {
     if( ! board.isOccupied(p)) return;
 
     Position next = p;
     do
     {
-        next =  move(next);
+        next =  direction.move(next);
     }while(hasNext(p, next));
 
     if( ! board.onBoard(next)) return;
 
-    if( ! board.isOccupied(next) && next != move(p))
+    if( ! board.isOccupied(next) && next != direction.move(p))
     {
         availablePositions.push(next);
         movesOriginalPosition[next].push(p);
@@ -86,14 +34,14 @@ const Positions& Reversi::gitAvailablePositions(Position p)
 {
     availablePositions.clear();
 
-    find(p, up);
-    find(p, down);
-    find(p, left);
-    find(p, right);
-    find(p, leftUp);
-    find(p, leftDown);
-    find(p, rightUp);
-    find(p, rightDown);
+    find(p, _up);
+    find(p, _down);
+    find(p, _left);
+    find(p, _right);
+    find(p, _left_up);
+    find(p, _left_down);
+    find(p, _right_up);
+    find(p, _right_down);
 
     return availablePositions;
 }
@@ -106,7 +54,7 @@ void Reversi::refresh(const Board& newBoard)
 const Positions& Reversi::getAllAvailablePositions(GridStatus gridStatus)
 {
     allPositions.clear();
-    for(int i = a1; i < MAX_GRID_NUM; ++i)
+    for(int i = a1; i < MAX_POSITION_NUM; ++i)
     {
         Position p = static_cast<Position>(i);
         if(board.at(p).getStatus() == gridStatus)
@@ -118,13 +66,13 @@ const Positions& Reversi::getAllAvailablePositions(GridStatus gridStatus)
     return allPositions;
 }
 
-bool Reversi::isReachable(Position from, Position to, MoveFun move)
+bool Reversi::isReachable(Position from, Position to, const Removable& direction)
 {
     enum { MAX_STEP = 8 };
     for(int i = a1; i <  MAX_STEP; ++i)
     {
-        from = move(from);
-        
+        from = direction.move(from);
+
         if( ! Board::onBoard(from)) return false;
         if(from == to) return true;
     }
@@ -132,29 +80,29 @@ bool Reversi::isReachable(Position from, Position to, MoveFun move)
     return false;
 }
 
-void Reversi::doTurn(Position from, Position to, MoveFun move)
+void Reversi::doTurn(Position from, Position to, const Removable& direction)
 {
-    if(isReachable(from, to, move))
+    if(isReachable(from, to, direction))
     {
-        Position next = move(from);
+        Position next = direction.move(from);
         while(next != to)
         {
             board.turnOver(next);
-            next = move(next);
+            next = direction.move(next);
         }
     }
 }
 
 void Reversi::turn(Position original, Position moves)
 {
-    doTurn(original, moves, up);
-    doTurn(original, moves, down);
-    doTurn(original, moves, left);
-    doTurn(original, moves, right);
-    doTurn(original, moves, leftUp);
-    doTurn(original, moves, leftDown);
-    doTurn(original, moves, rightUp);
-    doTurn(original, moves, rightDown);
+    doTurn(original, moves, _up);
+    doTurn(original, moves, _down);
+    doTurn(original, moves, _left);
+    doTurn(original, moves, _right);
+    doTurn(original, moves, _left_up);
+    doTurn(original, moves, _left_down);
+    doTurn(original, moves, _right_up);
+    doTurn(original, moves, _right_down);
 }
 
 const Board& Reversi::capture(Position movePosition)

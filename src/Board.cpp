@@ -88,7 +88,7 @@ void Board::print() const
     std::cout <<  "\n" << "a b c d e f g h" << std::endl;
 
     enum { COLUMN_NUM = 8 };
-    for(int i = a1; i < MAX_GRID_NUM; ++i)
+    for(int i = a1; i < MAX_POSITION_NUM; ++i)
     {
         if(i % COLUMN_NUM == 0 && i != 0)
         {
