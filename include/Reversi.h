@@ -7,7 +7,10 @@
 struct Reversi
 {
     const Board& getBoard() const;
+    void refresh(const Board&);
+
     const Positions& gitAvailablePositions(Position);
+    const Positions& getAllAvailablePositions(GridStatus);
 
 private:
     bool hasNext(Position curr, Position moves) const;
@@ -19,6 +22,7 @@ private:
 
 private:
     Positions availablePositions;
+    Positions allPositions;
 };
 
 #endif

@@ -14,8 +14,11 @@ struct Positions
     bool isEmpty() const; 
     bool operator==(const Positions& rhs) const;
     bool operator!=(const Positions& rhs) const;
+    Positions& operator+(const Positions&);
+
     Position at(int index) const;
     size_t size() const;
+    void print() const;
 
 private:
     bool contains(Position p) const;

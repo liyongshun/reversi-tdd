@@ -7,7 +7,6 @@ Grid::Grid()
 
 void Grid::place(GridStatus status)
 {
-    if(status == EMPTY) return;
     this->status = status;
 }
 
@@ -41,4 +40,9 @@ bool Grid::isWhite() const
 bool Grid::operator!=(const Grid& rhs) const
 {
     return status != rhs.status;
+}
+
+GridStatus Grid::getStatus() const
+{
+    return status;
 }

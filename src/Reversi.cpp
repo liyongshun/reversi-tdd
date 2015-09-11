@@ -7,7 +7,7 @@ const Board& Reversi::getBoard() const
 
 namespace
 {
-    const Position INVALID_POSITION = static_cast<Position>(h8+1);
+    const Position INVALID_POSITION = static_cast<Position>(MAX_GRID_NUM);
 
     Position up(Position p)
     {
@@ -94,4 +94,24 @@ const Positions& Reversi::gitAvailablePositions(Position p)
     find(p, rightDown);
 
     return availablePositions;
+}
+
+void Reversi::refresh(const Board& newBoard)
+{
+    board = newBoard;
+}
+
+const Positions& Reversi::getAllAvailablePositions(GridStatus gridStatus)
+{
+    allPositions.clear();
+    for(int i = a1; i < MAX_GRID_NUM; ++i)
+    {
+        Position p = static_cast<Position>(i);
+        if(board.at(p).getStatus() == gridStatus)
+        {
+            allPositions = allPositions + gitAvailablePositions(p);
+        }
+    }
+
+    return allPositions;
 }

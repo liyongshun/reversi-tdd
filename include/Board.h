@@ -5,6 +5,9 @@
 #include "Grid.h"
 
 struct Positions;
+
+enum {MAX_GRID_NUM = h8+1 };
+
 struct Board
 {
     Board();
@@ -15,11 +18,11 @@ struct Board
     Grid at(Position p) const;
     bool isOccupied(Position) const;
     bool operator==(const Board& rhs) const;
-    
+    void print() const;
+
     static bool onBoard(Position);
 
 private:
-    enum {MAX_GRID_NUM = h8+1 };
     Grid grids[MAX_GRID_NUM];
 };
 

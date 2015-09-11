@@ -60,11 +60,42 @@ bool Board::operator==(const Board& rhs) const
     size_t counter = 0;
     for(const auto grid : grids)
     {
-        if(grid != rhs.grids[counter++]) return false;
-
+        if(grid.getStatus() != rhs.grids[counter++].getStatus()) return false;
     }
 
     return true;
+}
+
+namespace
+{
+    char to_c(Grid grid)
+    {
+
+        switch(grid.getStatus())
+        {
+            case EMPTY: return '_';
+            case BLACK: return 'B';
+            case WHITE: return 'W';
+            default: return '@';
+        }
+    }
+}
+
+void Board::print() const
+{
+    std::cout <<  "\n" << "a b c d e f g h" << std::endl;
+
+    enum { COLUMN_NUM = 8 };
+    for(int i = a1; i < MAX_GRID_NUM; ++i)
+    {
+        if(i % COLUMN_NUM == 0 && i != 0)
+        {
+            std::cout << " " << i/COLUMN_NUM << "\n";
+        }
+        std::cout << to_c(grids[i]) << " ";
+    }
+
+    std::cout << " " << COLUMN_NUM << "\n";
 }
 
 

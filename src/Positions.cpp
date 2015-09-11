@@ -43,6 +43,8 @@ bool Positions::contains(Position p) const
 
 void Positions::push(Position p)
 {
+    if(contains(p)) return;
+
     positions.push_back(p);
 }
 
@@ -61,5 +63,24 @@ size_t Positions::size() const
     return positions.size();
 }
 
+Positions& Positions::operator+(const Positions& rhs)
+{
+    for(auto position : rhs.positions)
+    {
+        push(position);
+    }
 
+    return *this;
+}
+
+void Positions::print() const
+{
+    for(auto position : positions)
+    {
+        std::cout << position << ", ";
+    }
+
+    std::cout << "\n";
+
+}
 

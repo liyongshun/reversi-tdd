@@ -24,44 +24,42 @@ TEST_F(ReversiTest, should_get_available_positions_given_a_valid_position_in_the
     ASSERT_EQ(EXPECT_POSITIONS_OF_d5, Reversi().gitAvailablePositions(d5));
 }
 
-// struct ReversiWithSpecificSetTest : ReversiTest
-// {
-//     ReversiWithSpecificSetTest()
-//     {
-//         buildSet();
-//         reversi.refresh(set);
-//     }
+struct ReversiWithSpecificSetTest : ReversiTest
+{
+    ReversiWithSpecificSetTest()
+    {
+        buildSet();
+        reversi.refresh(set);
+    }
 
-//     void buildSet()
-//     {
-//         set.place(Positions{a1, c3, e3, f4, e8}, BLACK);
-//         set.place(Positions{a2, d4, e4, e5, f5, b8, c8, d8}, WHITE);
-//     }
+    void buildSet()
+    {
+        set.place(Positions{d4, e4, d5, e5}, EMPTY);
+        set.place(Positions{a1, c3, e3, f4, e8}, BLACK);
+        set.place(Positions{a2, d4, e4, e5, f5, b8, c8, d8}, WHITE);
+    }
 
-//     void ASSERT_BOARD(const Position move, const Positions& positionChanged)
-//     {
-//         Board EXPECT_SET(set);
-//         EXPECT_SET.place(positionChanged, BLACK);
-//         ASSERT_EQ(EXPECT_SET, reversi.capture(move));
-//         EXPECT_SET.print();
-//     }
+    // void ASSERT_BOARD(const Position move, const Positions& positionChanged)
+    // {
+    //     Board EXPECT_SET(set);
+    //     EXPECT_SET.place(positionChanged, BLACK);
+    //     ASSERT_EQ(EXPECT_SET, reversi.capture(move));
+    //     EXPECT_SET.print();
+    // }
 
-// protected:
-//     Board set;
-// };
+protected:
+    Board set;
+};
 
-// namespace
-// {
-//     const Positions EXPECT_POSITIONS_ALL_BLACKS = {a3, f6, c5, e6, c4, d6, a8};
-// }
+namespace
+{
+    const Positions EXPECT_POSITIONS_ALL_BLACKS = {a3, f6, c5, e6, c4, d6, a8};
+}
 
-// TEST(ReversiWithSpecificSetTest, should_get_all_available_positions_given_a_disk_with_a_specific_set)
-// {
-//     Reversi reversi;
-//     reversi.refresh(set);
-
-//     ASSERT_EQ(EXPECT_POSITIONS_ALL_BLACKS, reversi.getAllAvailablePositions(BLACK));
-// }
+TEST_F(ReversiWithSpecificSetTest, should_get_all_available_positions_given_a_disk_with_a_specific_set)
+{
+    ASSERT_EQ(EXPECT_POSITIONS_ALL_BLACKS, reversi.getAllAvailablePositions(BLACK));
+}
 
 // TEST(ReversiWithSpecificSetTest, should_turn_over_the_captured_disk_given_a_available_position)
 // {
