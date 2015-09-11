@@ -1,4 +1,5 @@
 #include "Reversi.h"
+#include <iostream>
 
 const Board& Reversi::getBoard() const
 {
@@ -77,6 +78,7 @@ void Reversi::find(Position p, MoveFun move)
     if( ! board.isOccupied(next) && next != move(p))
     {
         availablePositions.push(next);
+        movesOriginalPosition[next].push(p);
     }
 }
 
@@ -114,4 +116,62 @@ const Positions& Reversi::getAllAvailablePositions(GridStatus gridStatus)
     }
 
     return allPositions;
+}
+
+bool Reversi::isReachable(Position from, Position to, MoveFun move)
+{
+    enum { MAX_STEP = 8 };
+    for(int i = a1; i <  MAX_STEP; ++i)
+    {
+        from = move(from);
+        
+        if( ! Board::onBoard(from)) return false;
+        if(from == to) return true;
+    }
+
+    return false;
+}
+
+void Reversi::doTurn(Position from, Position to, MoveFun move)
+{
+    if(isReachable(from, to, move))
+    {
+        Position next = move(from);
+        while(next != to)
+        {
+            board.turnOver(next);
+            next = move(next);
+        }
+    }
+}
+
+void Reversi::turn(Position original, Position moves)
+{
+    doTurn(original, moves, up);
+    doTurn(original, moves, down);
+    doTurn(original, moves, left);
+    doTurn(original, moves, right);
+    doTurn(original, moves, leftUp);
+    doTurn(original, moves, leftDown);
+    doTurn(original, moves, rightUp);
+    doTurn(original, moves, rightDown);
+}
+
+const Board& Reversi::capture(Position movePosition)
+{
+    lastBoard = board;
+    while( ! movesOriginalPosition[movePosition].isEmpty())
+    {
+        Position originalPosition = movesOriginalPosition[movePosition].pop();
+        board.place(movePosition, board.at(originalPosition).getStatus());
+        turn(originalPosition, movePosition);
+    }
+
+    return board;
+}
+
+const Board& Reversi::retract()
+{
+    board = lastBoard;
+    return board;
 }

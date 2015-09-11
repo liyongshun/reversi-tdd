@@ -39,13 +39,14 @@ struct ReversiWithSpecificSetTest : ReversiTest
         set.place(Positions{a2, d4, e4, e5, f5, b8, c8, d8}, WHITE);
     }
 
-    // void ASSERT_BOARD(const Position move, const Positions& positionChanged)
-    // {
-    //     Board EXPECT_SET(set);
-    //     EXPECT_SET.place(positionChanged, BLACK);
-    //     ASSERT_EQ(EXPECT_SET, reversi.capture(move));
-    //     EXPECT_SET.print();
-    // }
+    void ASSERT_BOARD(const Position move, const Positions& positionChanged)
+    {
+        Board EXPECT_SET(set);
+        EXPECT_SET.place(positionChanged, BLACK);
+        ASSERT_EQ(EXPECT_SET, reversi.capture(move));
+        // EXPECT_SET.print();
+        reversi.retract();
+    }
 
 protected:
     Board set;
@@ -61,13 +62,15 @@ TEST_F(ReversiWithSpecificSetTest, should_get_all_available_positions_given_a_di
     ASSERT_EQ(EXPECT_POSITIONS_ALL_BLACKS, reversi.getAllAvailablePositions(BLACK));
 }
 
-// TEST(ReversiWithSpecificSetTest, should_turn_over_the_captured_disk_given_a_available_position)
-// {
-//     ASSERT_BOARD(a3, Positions{a2, a3});
-//     ASSERT_BOARD(f6, Positions{d4, e5, f5, f6});
-//     ASSERT_BOARD(e6, Positions{e4, e5, e6});
-//     ASSERT_BOARD(c5, Positions{d4, c5});
-//     ASSERT_BOARD(c4, Positions{c4, d4, e4});
-//     ASSERT_BOARD(d6, Positions{d6, e5});
-//     ASSERT_BOARD(a8, Positions{a8, b8, c8, d8});
-// }
+TEST_F(ReversiWithSpecificSetTest, should_turn_over_the_captured_disk_given_a_available_position)
+{
+    reversi.getAllAvailablePositions(BLACK);
+
+    ASSERT_BOARD(a3, Positions{a2, a3});
+    ASSERT_BOARD(f6, Positions{d4, e5, f5, f6});
+    ASSERT_BOARD(e6, Positions{e4, e5, e6});
+    ASSERT_BOARD(c5, Positions{d4, c5});
+    ASSERT_BOARD(c4, Positions{c4, d4, e4});
+    ASSERT_BOARD(d6, Positions{d6, e5});
+    ASSERT_BOARD(a8, Positions{a8, b8, c8, d8});
+}

@@ -44,9 +44,11 @@ void Board::place(Position p, GridStatus s)
 
 void Board::place(const Positions& positions, GridStatus status)
 {
-    for(size_t index = 0; index < positions.size(); ++index)
+    Positions given = positions;
+    while( ! given.isEmpty())
     {
-        place(positions.at(index), status);
+        Position p = given.pop();
+        place(p, status);   
     }
 }
 

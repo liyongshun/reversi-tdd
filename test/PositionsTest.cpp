@@ -55,19 +55,4 @@ TEST(PositionsTest, should_clear_the_positions_given_not_empty_positions)
     ASSERT_TRUE(GIVEN.isEmpty());
 }
 
-TEST(PositionsTest, should_get_position_given_a_not_empty_positions)
-{
-    Positions GIVEN {a1, b2, c3};
-
-    ASSERT_EQ(a1, GIVEN.at(0));
-    ASSERT_EQ(b2, GIVEN.at(1));
-}
-
-TEST(PositionsTest, should_get_size_given_a_not_empty_positions)
-{
-    Positions GIVEN {a1, b2};
-
-    ASSERT_EQ(2, GIVEN.size());
-}
-
 

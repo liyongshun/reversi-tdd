@@ -2,13 +2,14 @@
 #define _INCL_OTHELLO_POSITIONS_H_
 
 #include "Position.h"
-#include <vector>
+#include <list>
 
 struct Positions
 {
     Positions(std::initializer_list<Position> positions = {});  
 
     void push(Position);
+    Position pop();
     void clear();
 
     bool isEmpty() const; 
@@ -16,15 +17,13 @@ struct Positions
     bool operator!=(const Positions& rhs) const;
     Positions& operator+(const Positions&);
 
-    Position at(int index) const;
-    size_t size() const;
     void print() const;
 
 private:
     bool contains(Position p) const;
 
 private:
-    std::vector<Position> positions;
+    std::list<Position> positions;
 
 };
 

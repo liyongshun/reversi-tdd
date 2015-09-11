@@ -48,19 +48,16 @@ void Positions::push(Position p)
     positions.push_back(p);
 }
 
+Position Positions::pop()
+{
+    Position front = positions.front();
+    positions.pop_front();
+    return front;
+}
+
 void Positions::clear()
 {
     positions.clear();
-}
-
-Position Positions::at(int index) const
-{
-    return positions.at(index);
-}
-
-size_t Positions::size() const
-{
-    return positions.size();
 }
 
 Positions& Positions::operator+(const Positions& rhs)
@@ -77,7 +74,7 @@ void Positions::print() const
 {
     for(auto position : positions)
     {
-        std::cout << position << ", ";
+        std::cout << to_str(position) << ", ";
     }
 
     std::cout << "\n";
