@@ -6,8 +6,6 @@
 
 struct Positions;
 
-enum {MAX_GRID_NUM = h8+1 };
-
 struct Board
 {
     Board();
@@ -23,7 +21,7 @@ struct Board
     static bool onBoard(Position);
 
 private:
-    Grid grids[MAX_GRID_NUM];
+    Grid grids[MAX_POSITION_NUM];
 };
 
 #endif

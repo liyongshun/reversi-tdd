@@ -4,6 +4,8 @@
 #include "Board.h"
 #include "Positions.h"
 
+struct Removable;
+
 struct Reversi
 {
     const Board& getBoard() const;
@@ -16,11 +18,10 @@ struct Reversi
 
 private:
     bool hasNext(Position curr, Position moves) const;
-    typedef Position (*MoveFun)(Position p);
-    void find(Position p, MoveFun);
-    bool isReachable(Position from, Position to, MoveFun);
+    void find(Position p, const Removable&);
+    bool isReachable(Position from, Position to, const Removable&);
     void turn(Position original, Position moves);
-    void doTurn(Position from, Position to, MoveFun);
+    void doTurn(Position from, Position to, const Removable&);
 
 private:
     Board board;
@@ -29,7 +30,7 @@ private:
 private:
     Positions availablePositions;
     Positions allPositions;
-    Positions movesOriginalPosition[MAX_GRID_NUM];
+    Positions movesOriginalPosition[MAX_POSITION_NUM];
 };
 
 #endif
