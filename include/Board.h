@@ -14,6 +14,8 @@ struct Board
     
     Grid at(Position p) const;
     bool isOccupied(Position) const;
+    bool operator==(const Board& rhs) const;
+    
     static bool onBoard(Position);
 
 private:

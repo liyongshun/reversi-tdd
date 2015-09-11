@@ -71,5 +71,5 @@ TEST(BoardTest, should_equals_given_two_board_which_place_the_same_disk)
 {
     Board one;
     Board another;
-    // ASSERT_EQ(one, another);
+    ASSERT_EQ(one, another);
 }

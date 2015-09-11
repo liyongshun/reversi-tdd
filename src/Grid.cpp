@@ -37,3 +37,8 @@ bool Grid::isWhite() const
 {
     return status == WHITE;
 }
+
+bool Grid::operator!=(const Grid& rhs) const
+{
+    return status != rhs.status;
+}

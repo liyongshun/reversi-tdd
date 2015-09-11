@@ -55,6 +55,18 @@ void Board::turnOver(Position p)
     grids[p].turnOver();
 }
 
+bool Board::operator==(const Board& rhs) const
+{
+    size_t counter = 0;
+    for(const auto grid : grids)
+    {
+        if(grid != rhs.grids[counter++]) return false;
+
+    }
+
+    return true;
+}
+
 
 
 

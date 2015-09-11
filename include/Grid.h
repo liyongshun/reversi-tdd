@@ -14,6 +14,7 @@ struct Grid
     bool isOccupied() const;
     bool isBlack() const;
     bool isWhite() const;
+    bool operator!=(const Grid& rhs) const;
 private:
     GridStatus status;
 };
