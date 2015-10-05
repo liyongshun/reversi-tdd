@@ -13,7 +13,7 @@ struct Reversi
 
     const Positions gitAvailablePositions(Position);
     const Positions getAllAvailablePositions(GridStatus);
-    const Board& capture(Position move);
+    const Board& capture(Position move, GridStatus);
     const Board& retract();
 
 private:

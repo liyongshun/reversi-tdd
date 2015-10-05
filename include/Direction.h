@@ -25,7 +25,6 @@ struct Direction : Removable
 	static Direction& left();
 	static Direction& right();
 
-private:
 	Direction(int factor);
 private:
 	int factor;
@@ -40,7 +39,6 @@ private:
 	const Removable& left;
 	const Removable& right;
 };
-
 
 #define _up Direction::up()
 #define _down Direction::down()
@@ -62,6 +60,5 @@ static Removable* directions[] =
     new _right_up,
     new _right_down
 };
-
 
 #endif /* INCLUDE_DIRECTION_H_ */

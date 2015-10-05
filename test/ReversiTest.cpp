@@ -43,7 +43,7 @@ struct ReversiWithSpecificSetTest : ReversiTest
     {
         Board EXPECT_SET(set);
         EXPECT_SET.place(positionChanged, BLACK);
-        ASSERT_EQ(EXPECT_SET, reversi.capture(move));
+        ASSERT_EQ(EXPECT_SET, reversi.capture(move, BLACK));
         EXPECT_SET.print();
         reversi.retract();
     }
