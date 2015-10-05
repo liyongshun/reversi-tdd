@@ -62,7 +62,7 @@ void Reversi::refresh(const Board& newBoard)
     board = newBoard;
 }
 
-const Board& Reversi::capture(Position movePosition)
+const Board& Reversi::capture(Position movePosition, GridStatus status)
 {
     lastBoard = board;
 
@@ -71,7 +71,7 @@ const Board& Reversi::capture(Position movePosition)
         board.turnOver(capturedPosition[movePosition].pop());
     }
 
-    board.place(movePosition, BLACK);
+    board.place(movePosition, status);
 
     return board;
 }
