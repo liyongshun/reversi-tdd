@@ -26,6 +26,21 @@ Grid Board::at(Position p) const
     return grids[p];
 }
 
+Positions Board::getAll(GridStatus status)
+{
+    Positions allPosition;
+
+    for(int p = a1; p < MAX_POSITION_NUM; ++p)
+    {
+        if(grids[p].getStatus() == status)
+        {
+            allPosition.push(static_cast<Position>(p));
+        }
+    }
+
+    return allPosition;
+}
+
 bool Board::isOccupied(Position p) const
 {
     if( ! onBoard(p)) return false;

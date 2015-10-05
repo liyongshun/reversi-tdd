@@ -41,6 +41,7 @@ private:
 	const Removable& right;
 };
 
+
 #define _up Direction::up()
 #define _down Direction::down()
 #define _left Direction::left()
@@ -49,5 +50,18 @@ private:
 #define _left_down JoinMovable(_left, _down)
 #define _right_up JoinMovable(_right, _up)
 #define _right_down JoinMovable(_right, _down)
+
+static Removable* directions[] =
+{
+    &_up,
+    &_down,
+    &_left,
+    &_right,
+    new _left_up,
+    new _left_down,
+    new _right_up,
+    new _right_down
+};
+
 
 #endif /* INCLUDE_DIRECTION_H_ */

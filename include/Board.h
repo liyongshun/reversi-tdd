@@ -14,6 +14,7 @@ struct Board
     void turnOver(Position);
     
     Grid at(Position p) const;
+    Positions getAll(GridStatus);
     bool isOccupied(Position) const;
     bool operator==(const Board& rhs) const;
     void print() const;
