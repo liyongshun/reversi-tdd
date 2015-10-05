@@ -15,7 +15,7 @@ struct Positions
     bool isEmpty() const; 
     bool operator==(const Positions& rhs) const;
     bool operator!=(const Positions& rhs) const;
-    Positions& operator+(const Positions&);
+    Positions& operator+=(const Positions&);
 
     void print() const;
 

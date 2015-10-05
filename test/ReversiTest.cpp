@@ -44,7 +44,7 @@ struct ReversiWithSpecificSetTest : ReversiTest
         Board EXPECT_SET(set);
         EXPECT_SET.place(positionChanged, BLACK);
         ASSERT_EQ(EXPECT_SET, reversi.capture(move));
-        // EXPECT_SET.print();
+        EXPECT_SET.print();
         reversi.retract();
     }
 

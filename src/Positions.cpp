@@ -60,7 +60,7 @@ void Positions::clear()
     positions.clear();
 }
 
-Positions& Positions::operator+(const Positions& rhs)
+Positions& Positions::operator+=(const Positions& rhs)
 {
     for(auto position : rhs.positions)
     {
